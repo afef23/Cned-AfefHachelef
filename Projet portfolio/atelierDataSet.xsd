@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="atelierDataSet" targetNamespace="http://tempuri.org/atelierDataSet.xsd" xmlns:mstns="http://tempuri.org/atelierDataSet.xsd" xmlns="http://tempuri.org/atelierDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="atelierConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="atelierConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Projet_portfolio.Properties.Settings.GlobalReference.Default.atelierConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="absenceTableAdapter" GeneratorDataComponentClassName="absenceTableAdapter" Name="absence" UserDataComponentName="absenceTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="atelierConnectionString (Settings)" DbObjectName="atelier.absence" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `idpersonnel`, `datedebut`, `idmotif`, `datefin` FROM `absence`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="motifTableAdapter" GeneratorDataComponentClassName="motifTableAdapter" Name="motif" UserDataComponentName="motifTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="atelierConnectionString (Settings)" DbObjectName="atelier.motif" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `idmotif`, `libelle` FROM `motif`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="personnelTableAdapter" GeneratorDataComponentClassName="personnelTableAdapter" Name="personnel" UserDataComponentName="personnelTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="atelierConnectionString (Settings)" DbObjectName="atelier.personnel" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `idpersonnel`, `idservice`, `nom`, `prenom`, `tel`, `mail` FROM `personnel`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="responsableTableAdapter" GeneratorDataComponentClassName="responsableTableAdapter" Name="responsable" UserDataComponentName="responsableTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="atelierConnectionString (Settings)" DbObjectName="atelier.responsable" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `login`, `pwd` FROM `responsable`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="serviceTableAdapter" GeneratorDataComponentClassName="serviceTableAdapter" Name="service" UserDataComponentName="serviceTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="atelierConnectionString (Settings)" DbObjectName="atelier.service" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `idservice`, `nom` FROM `service`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="atelierDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="atelierDataSet" msprop:Generator_UserDSName="atelierDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="absence" msprop:Generator_TableClassName="absenceDataTable" msprop:Generator_TableVarName="tableabsence" msprop:Generator_TablePropName="absence" msprop:Generator_RowDeletingName="absenceRowDeleting" msprop:Generator_RowChangingName="absenceRowChanging" msprop:Generator_RowEvHandlerName="absenceRowChangeEventHandler" msprop:Generator_RowDeletedName="absenceRowDeleted" msprop:Generator_UserTableName="absence" msprop:Generator_RowChangedName="absenceRowChanged" msprop:Generator_RowEvArgName="absenceRowChangeEvent" msprop:Generator_RowClassName="absenceRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="motif" msprop:Generator_TableClassName="motifDataTable" msprop:Generator_TableVarName="tablemotif" msprop:Generator_TablePropName="motif" msprop:Generator_RowDeletingName="motifRowDeleting" msprop:Generator_RowChangingName="motifRowChanging" msprop:Generator_RowEvHandlerName="motifRowChangeEventHandler" msprop:Generator_RowDeletedName="motifRowDeleted" msprop:Generator_UserTableName="motif" msprop:Generator_RowChangedName="motifRowChanged" msprop:Generator_RowEvArgName="motifRowChangeEvent" msprop:Generator_RowClassName="motifRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="personnel" msprop:Generator_TableClassName="personnelDataTable" msprop:Generator_TableVarName="tablepersonnel" msprop:Generator_TablePropName="personnel" msprop:Generator_RowDeletingName="personnelRowDeleting" msprop:Generator_RowChangingName="personnelRowChanging" msprop:Generator_RowEvHandlerName="personnelRowChangeEventHandler" msprop:Generator_RowDeletedName="personnelRowDeleted" msprop:Generator_UserTableName="personnel" msprop:Generator_RowChangedName="personnelRowChanged" msprop:Generator_RowEvArgName="personnelRowChangeEvent" msprop:Generator_RowClassName="personnelRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="responsable" msprop:Generator_TableClassName="responsableDataTable" msprop:Generator_TableVarName="tableresponsable" msprop:Generator_TablePropName="responsable" msprop:Generator_RowDeletingName="responsableRowDeleting" msprop:Generator_RowChangingName="responsableRowChanging" msprop:Generator_RowEvHandlerName="responsableRowChangeEventHandler" msprop:Generator_RowDeletedName="responsableRowDeleted" msprop:Generator_UserTableName="responsable" msprop:Generator_RowChangedName="responsableRowChanged" msprop:Generator_RowEvArgName="responsableRowChangeEvent" msprop:Generator_RowClassName="responsableRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="service" msprop:Generator_TableClassName="serviceDataTable" msprop:Generator_TableVarName="tableservice" msprop:Generator_TablePropName="service" msprop:Generator_RowDeletingName="serviceRowDeleting" msprop:Generator_RowChangingName="serviceRowChanging" msprop:Generator_RowEvHandlerName="serviceRowChangeEventHandler" msprop:Generator_RowDeletedName="serviceRowDeleted" msprop:Generator_UserTableName="service" msprop:Generator_RowChangedName="serviceRowChanged" msprop:Generator_RowEvArgName="serviceRowChangeEvent" msprop:Generator_RowClassName="serviceRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
