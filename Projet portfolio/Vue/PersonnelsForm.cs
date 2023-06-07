@@ -20,20 +20,6 @@ namespace Projet_portfolio
         private string connectionString = "server=localhost;user id=root;database=atelier;SslMode=None";
         public int personnelId { get; private set; }
 
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         public PersonnelsForm()
@@ -43,12 +29,10 @@ namespace Projet_portfolio
             RecupPersonnels();
             groupBox3.Visible = false;
             RemplirComboBoxService();
-            
-
 
         }
 
-
+        //Connexion à la base de donnée
         private void InitConnection()
         {
             try
@@ -63,9 +47,9 @@ namespace Projet_portfolio
 
             }
 
-        
         }
 
+        //Récupérer les coordonnées du personnel sur la base de données
         private void RecupPersonnels()
         {
             ListBoxId.Visible = true;
@@ -93,7 +77,7 @@ namespace Projet_portfolio
 
         }
 
-
+        //Remplir la comboList avec les différents services contenus dans la base de données 
         private void RemplirComboBoxService()
         {
             string query = "SELECT nom FROM service";
@@ -103,21 +87,15 @@ namespace Projet_portfolio
             {
                 string nomService = reader.GetString(0);
                 ComboBoxService.Items.Add(nomService);
-;
-
             }
             reader.Close();
         }
 
 
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        //Ajouter du personnel
         private void BtnAjouter_Click(object sender, EventArgs e)
         {
+            //vérifier que Btn ajouter a été sélectionné
             if (BtnAjouter.Text == "Ajouter")
             {
                 string nom = Nom.Text;
@@ -127,14 +105,17 @@ namespace Projet_portfolio
 
                 int idService = 0;
 
+
+                //vérifie qu'un élémet a bien été sélectionné dans la comboList
                 if (ComboBoxService.SelectedItem != null)
 
                 {
+                    
                     string service = ComboBoxService.SelectedItem.ToString();
-
+                    //vérifie que tous les champs ont bien été remplis
                     if (nom != "" && prenom != "" && tel != "" && mail != "")
                     {
-
+                        //Récupérer idservice
                         string query = "SELECT idservice FROM service WHERE nom = @service";
                         command = new MySqlCommand(query, connection);
                         command.Parameters.AddWithValue("@service", service);
@@ -146,7 +127,7 @@ namespace Projet_portfolio
                         }
 
                         reader.Close();
-
+                        //rajouter un membre du personnel
                         query = "INSERT INTO personnel (idservice, nom, prenom, tel, mail) VALUES (@idservice, @nom, @prenom, @tel, @mail)";
                         command = new MySqlCommand(query, connection);
                         command.Parameters.AddWithValue("@idservice", idService);
@@ -170,11 +151,16 @@ namespace Projet_portfolio
                 }
                 else { MessageBox.Show("Veuillez Selectioner un service !"); }
             }
+
+            // Si btn Modifier a été selectionné
             else
             {
+
                 if (ComboBoxService != null) { 
                 ConfirmationForm confirmationForm = new ConfirmationForm();
                 confirmationForm.ShowDialog();
+
+                //Demande de confirmation
                 if (confirmationForm.confirmation)
                 {
                     string ligne = ListBoxId.SelectedItem.ToString();
@@ -209,9 +195,6 @@ namespace Projet_portfolio
 
 
 
-
-
-
                     string query2 = "UPDATE personnel SET nom = @nombis, prenom = @prenombis, mail = @mailbis, tel = @telbis, idservice = (SELECT idservice FROM service WHERE nom = @servicebis) WHERE idpersonnel = @idpersonnel";
                     command = new MySqlCommand(query2, connection);
                     command.Parameters.AddWithValue("@nombis", nombis);
@@ -241,15 +224,7 @@ namespace Projet_portfolio
             }
         }
 
-        private void PersonnelsForm_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
+        //Click bouton ajouter
         private void button1_Click(object sender, EventArgs e)
         {
             BtnAnnuler_Click(null, null);
@@ -258,13 +233,17 @@ namespace Projet_portfolio
             BtnAjouter.Text = "Ajouter";
         }
 
+        //click btn Modifier
         private void BtnModifier_Click(object sender, EventArgs e)
         {
             groupBox3.Visible = true;
             groupBox3.Text = "Modifer un personnel";
             BtnAjouter.Text = "Modifier";
+
+            //Vérifier qu'un membre du personnel est sélectionner avant de modifier
             if(ListBoxId.SelectedIndex !=-1)
             {
+                //récuperer ce qu'il y a dans la listbox et mettre dans des variables
                 string ligne = ListBoxId.SelectedItem.ToString();
                 List<string> liste = ligne.Split(' ').ToList();
                 string nom = liste[0];
@@ -272,6 +251,8 @@ namespace Projet_portfolio
                 string mail = liste[2];
                 string tel = liste[3];
                 string nomService = liste[4];
+
+                // préremplir les champs 
                 Nom.Text = nom;
                 TextBoxPrenom.Text = prenom;
                 TextBoxMail.Text = mail;
@@ -280,6 +261,7 @@ namespace Projet_portfolio
             }else { MessageBox.Show("Veuillez Selectioner un membre du personnel pour le modifier !"); }
         }
 
+        // vider la saisie 
         private void BtnAnnuler_Click(object sender, EventArgs e)
         {
             Nom.Text = "";
@@ -289,13 +271,17 @@ namespace Projet_portfolio
             ComboBoxService.SelectedIndex = -1;
         }
 
+        
+
         private void BtnSupprimer_Click(object sender, EventArgs e)
         {
-            if(ListBoxId.SelectedIndex != -1)
+            //Vérifier qu'un membre du personnel est sélectionner avant de supprimer
+            if (ListBoxId.SelectedIndex != -1)
              {
                 ConfirmationForm confirmationForm = new ConfirmationForm();
                 confirmationForm.ShowDialog();
 
+                // demande de confirmation
                 if (confirmationForm.confirmation) {
                     string ligne = ListBoxId.SelectedItem.ToString();
                     List<string> liste = ligne.Split(' ').ToList();
@@ -317,42 +303,47 @@ namespace Projet_portfolio
             }else { MessageBox.Show("Veuillez Selectioner un membre du personnel pour le supprimer !"); }
         }
 
+      
+        // fait apparaitre la fenetre le gestionnaire des absences
         private void BtnAbsence_Click(object sender, EventArgs e)
         {
-            if (ListBoxId.SelectedIndex != -1)
-            {
-                string ligne = ListBoxId.SelectedItem.ToString();
-                List<string> liste = ligne.Split(' ').ToList();
-                string nom = liste[0];
-                string prenom = liste[1];
-                string mail = liste[2];
-                string tel = liste[3];
-                string nomService = liste[4];
-                string query = "SELECT idpersonnel FROM personnel WHERE nom =@nom AND prenom=@prenom AND mail=@mail AND tel=@tel";
-                command = new MySqlCommand(query, connection);
-                command.Parameters.AddWithValue("@nom", nom);
-                command.Parameters.AddWithValue("@prenom", prenom);
-                command.Parameters.AddWithValue("@mail", mail);
-                command.Parameters.AddWithValue("@tel", tel);
-
-                reader = command.ExecuteReader();
-
-                if (reader.Read())
+                //Vérifier qu'un membre du personnel est sélectionner avant d'acceder à son registre d'absences
+                if (ListBoxId.SelectedIndex != -1)
                 {
-                    personnelId = reader.GetInt32(0);
+                    string ligne = ListBoxId.SelectedItem.ToString();
+                    List<string> liste = ligne.Split(' ').ToList();
+                    string nom = liste[0];
+                    string prenom = liste[1];
+                    string mail = liste[2];
+                    string tel = liste[3];
+                    string nomService = liste[4];
+
+                    //récuperer idpersonnel
+                    string query = "SELECT idpersonnel FROM personnel WHERE nom =@nom AND prenom=@prenom AND mail=@mail AND tel=@tel";
+                    command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@nom", nom);
+                    command.Parameters.AddWithValue("@prenom", prenom);
+                    command.Parameters.AddWithValue("@mail", mail);
+                    command.Parameters.AddWithValue("@tel", tel);
+
+                    reader = command.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        personnelId = reader.GetInt32(0);
+                    }
+
+                    reader.Close();
+                   
+                    //rendre possible l'utlisation de idpersonnel dans la fenêtre absences
+                    AbsencesForm absencesForm = new AbsencesForm(personnelId);
+                    absencesForm.ShowDialog();
                 }
-
-                reader.Close();
-
-                AbsencesForm absencesForm = new AbsencesForm(personnelId);
-                absencesForm.ShowDialog();
-            }
-            else { MessageBox.Show("Veuillez sellectioner un membre du personnel afin de consulter son registre d'abscence."); }
+                else { MessageBox.Show("Veuillez sellectioner un membre du personnel afin de consulter son registre d'abscence."); }
         }
 
-        private void groupBox3_Enter(object sender, EventArgs e)
-        {
-
-        }
+          
+        
+    
     }
 }

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBoxMotif = new System.Windows.Forms.ComboBox();
+            this.LblMotif = new System.Windows.Forms.Label();
             this.ListBoxAbsence = new System.Windows.Forms.ListBox();
             this.BtnModifierAbsence = new System.Windows.Forms.Button();
             this.LblFin = new System.Windows.Forms.Label();
@@ -37,15 +39,15 @@
             this.BtnAnnulerAbsence = new System.Windows.Forms.Button();
             this.BtnAjouterAbsence = new System.Windows.Forms.Button();
             this.TimePickerDebut = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBoxMotif = new System.Windows.Forms.ComboBox();
+            this.BtnSupprimerAbsence = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.BtnSupprimerAbsence);
             this.groupBox2.Controls.Add(this.comboBoxMotif);
-            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.LblMotif);
             this.groupBox2.Controls.Add(this.ListBoxAbsence);
             this.groupBox2.Controls.Add(this.BtnModifierAbsence);
             this.groupBox2.Controls.Add(this.LblFin);
@@ -60,7 +62,24 @@
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Absences";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // comboBoxMotif
+            // 
+            this.comboBoxMotif.FormattingEnabled = true;
+            this.comboBoxMotif.Location = new System.Drawing.Point(472, 135);
+            this.comboBoxMotif.Name = "comboBoxMotif";
+            this.comboBoxMotif.Size = new System.Drawing.Size(138, 28);
+            this.comboBoxMotif.TabIndex = 26;
+            this.comboBoxMotif.Text = "Motif";
+            // 
+            // LblMotif
+            // 
+            this.LblMotif.AutoSize = true;
+            this.LblMotif.Location = new System.Drawing.Point(415, 138);
+            this.LblMotif.Name = "LblMotif";
+            this.LblMotif.Size = new System.Drawing.Size(52, 20);
+            this.LblMotif.TabIndex = 25;
+            this.LblMotif.Text = "Motif :";
             // 
             // ListBoxAbsence
             // 
@@ -73,7 +92,7 @@
             // 
             // BtnModifierAbsence
             // 
-            this.BtnModifierAbsence.Location = new System.Drawing.Point(636, 100);
+            this.BtnModifierAbsence.Location = new System.Drawing.Point(636, 86);
             this.BtnModifierAbsence.Name = "BtnModifierAbsence";
             this.BtnModifierAbsence.Size = new System.Drawing.Size(121, 58);
             this.BtnModifierAbsence.TabIndex = 23;
@@ -105,12 +124,13 @@
             this.TimePickerFin.Name = "TimePickerFin";
             this.TimePickerFin.Size = new System.Drawing.Size(197, 26);
             this.TimePickerFin.TabIndex = 20;
+            this.TimePickerFin.Value = new System.DateTime(2023, 6, 7, 0, 0, 0, 0);
             // 
             // BtnAnnulerAbsence
             // 
-            this.BtnAnnulerAbsence.Location = new System.Drawing.Point(636, 164);
+            this.BtnAnnulerAbsence.Location = new System.Drawing.Point(636, 217);
             this.BtnAnnulerAbsence.Name = "BtnAnnulerAbsence";
-            this.BtnAnnulerAbsence.Size = new System.Drawing.Size(121, 59);
+            this.BtnAnnulerAbsence.Size = new System.Drawing.Size(121, 58);
             this.BtnAnnulerAbsence.TabIndex = 19;
             this.BtnAnnulerAbsence.Text = "Annuler";
             this.BtnAnnulerAbsence.UseVisualStyleBackColor = true;
@@ -118,7 +138,7 @@
             // 
             // BtnAjouterAbsence
             // 
-            this.BtnAjouterAbsence.Location = new System.Drawing.Point(636, 36);
+            this.BtnAjouterAbsence.Location = new System.Drawing.Point(636, 22);
             this.BtnAjouterAbsence.Name = "BtnAjouterAbsence";
             this.BtnAjouterAbsence.Size = new System.Drawing.Size(121, 58);
             this.BtnAjouterAbsence.TabIndex = 18;
@@ -128,32 +148,24 @@
             // 
             // TimePickerDebut
             // 
+            this.TimePickerDebut.Checked = false;
             this.TimePickerDebut.Location = new System.Drawing.Point(413, 45);
             this.TimePickerDebut.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
             this.TimePickerDebut.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.TimePickerDebut.Name = "TimePickerDebut";
             this.TimePickerDebut.Size = new System.Drawing.Size(197, 26);
             this.TimePickerDebut.TabIndex = 17;
+            this.TimePickerDebut.Value = new System.DateTime(2023, 6, 7, 0, 0, 0, 0);
             // 
-            // label1
+            // BtnSupprimerAbsence
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(415, 138);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 20);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Motif :";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // comboBoxMotif
-            // 
-            this.comboBoxMotif.FormattingEnabled = true;
-            this.comboBoxMotif.Location = new System.Drawing.Point(472, 135);
-            this.comboBoxMotif.Name = "comboBoxMotif";
-            this.comboBoxMotif.Size = new System.Drawing.Size(138, 28);
-            this.comboBoxMotif.TabIndex = 26;
-            this.comboBoxMotif.Text = "Motif";
-            this.comboBoxMotif.SelectedIndexChanged += new System.EventHandler(this.comboBoxMotif_SelectedIndexChanged);
+            this.BtnSupprimerAbsence.Location = new System.Drawing.Point(636, 153);
+            this.BtnSupprimerAbsence.Name = "BtnSupprimerAbsence";
+            this.BtnSupprimerAbsence.Size = new System.Drawing.Size(121, 58);
+            this.BtnSupprimerAbsence.TabIndex = 27;
+            this.BtnSupprimerAbsence.Text = "Supprimer";
+            this.BtnSupprimerAbsence.UseVisualStyleBackColor = true;
+            this.BtnSupprimerAbsence.Click += new System.EventHandler(this.BtnSupprimerAbsence_Click);
             // 
             // AbsencesForm
             // 
@@ -181,6 +193,7 @@
         private System.Windows.Forms.DateTimePicker TimePickerDebut;
         private System.Windows.Forms.ListBox ListBoxAbsence;
         private System.Windows.Forms.ComboBox comboBoxMotif;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LblMotif;
+        private System.Windows.Forms.Button BtnSupprimerAbsence;
     }
 }

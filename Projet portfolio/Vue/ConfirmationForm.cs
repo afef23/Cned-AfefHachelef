@@ -22,23 +22,15 @@ namespace Projet_portfolio
         }
 
 
-
+        //Programmer une variable Confirmation à true 
         private void BtnConfirmation_Click(object sender, EventArgs e)
         {
             confirmation = true;
             this.Close();
         }
 
-        private void LblConfirmation_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void ConfirmationForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        //Programmer une variable confirmation à false 
         private void BtnAnnuler_Click(object sender, EventArgs e)
         {
             confirmation = false;

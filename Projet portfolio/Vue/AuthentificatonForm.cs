@@ -14,6 +14,7 @@ namespace Projet_portfolio
 {
     public partial class AuthenficationForm : Form
     {
+        
         private MySqlConnection connection;
         private string connectionString = "server=localhost;user id=root;database=atelier;SslMode=None";
 
@@ -22,8 +23,9 @@ namespace Projet_portfolio
             InitializeComponent();
             InitConnection();
             textBoxMdp.UseSystemPasswordChar = true;
-
         }
+
+        //Connextion à la base de donnée
         private void InitConnection()
         {
             try
@@ -35,13 +37,10 @@ namespace Projet_portfolio
             {
                 Console.WriteLine(e.Message);
                 Environment.Exit(0);
-
             }
-
-
         }
 
-        //Fonction provenant d'internet pour hashé
+        //Fonction trouvée sur internet qui permet d'hasher
         private string ComputeSHA256Hash(string input)
         {
             using (SHA256 sha256 = SHA256.Create())
@@ -55,7 +54,7 @@ namespace Projet_portfolio
                 return builder.ToString();
             }
         }
-
+        // Retourne si il y a une occurence d'un identifiant et d'un mot de passe fourni en paramètre, dans la base de données
         private bool ConnexionResp(string identifiant, string mdp)
         {
             string mdpHash = ComputeSHA256Hash(mdp);
@@ -68,20 +67,20 @@ namespace Projet_portfolio
         }
 
 
-        
-
-
-
-
+        //si btnValider click
         private void BtnValider_Click(object sender, EventArgs e)
         {
 
             string identifiant = textBoxLogin.Text;
             string mdp = textBoxMdp.Text;
+
+            //vérifie si les champs login et mot de passe ne sont pas vides
             if (identifiant != "" && mdp!="")
             {
+                //Vérifier l'identifiant et le mot de passe sont corrects
                 if (ConnexionResp(identifiant, mdp))
                 {
+                    //Faire apparaître PersonnelsForm et disparaître AuthentificationForm si correct
                     PersonnelsForm personnelsForm = new PersonnelsForm();
                     personnelsForm.Show();
                     this.Hide();
@@ -93,10 +92,7 @@ namespace Projet_portfolio
             } else { MessageBox.Show("Veuillez Remplir le champ correspondant a votre identifiant ou votre mot de passe avant de Valider") ; }
         }
 
-        private void AuthenficationForm_Load(object sender, EventArgs e)
-        {
-
-        }
+     
     }
 }
 

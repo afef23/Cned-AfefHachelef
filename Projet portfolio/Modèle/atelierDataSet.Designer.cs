@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace Projet_portfolio {
+namespace Projet_portfolio.Modèle {
     
     
     /// <summary>
@@ -1823,7 +1823,7 @@ namespace Projet_portfolio {
         }
     }
 }
-namespace Projet_portfolio.atelierDataSetTableAdapters {
+namespace Projet_portfolio.Modèle.atelierDataSetTableAdapters {
     
     
     /// <summary>

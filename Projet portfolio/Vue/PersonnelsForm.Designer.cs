@@ -44,9 +44,9 @@
             this.LblTel = new System.Windows.Forms.Label();
             this.BtnAnnuler = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAjouterPersonnel = new System.Windows.Forms.Button();
             this.BtnAbsence = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnAjouterPersonnel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -87,7 +87,6 @@
             this.Nom.Name = "Nom";
             this.Nom.Size = new System.Drawing.Size(180, 26);
             this.Nom.TabIndex = 3;
-            this.Nom.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // TextBoxTel
             // 
@@ -197,16 +196,24 @@
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Personnels";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // btnAjouterPersonnel
+            // 
+            this.btnAjouterPersonnel.Location = new System.Drawing.Point(667, 17);
+            this.btnAjouterPersonnel.Name = "btnAjouterPersonnel";
+            this.btnAjouterPersonnel.Size = new System.Drawing.Size(120, 40);
+            this.btnAjouterPersonnel.TabIndex = 4;
+            this.btnAjouterPersonnel.Text = "Ajouter";
+            this.btnAjouterPersonnel.UseVisualStyleBackColor = true;
+            this.btnAjouterPersonnel.Click += new System.EventHandler(this.button1_Click);
             // 
             // BtnAbsence
             // 
-            this.BtnAbsence.Location = new System.Drawing.Point(667, 189);
+            this.BtnAbsence.Location = new System.Drawing.Point(667, 188);
             this.BtnAbsence.Name = "BtnAbsence";
             this.BtnAbsence.Size = new System.Drawing.Size(120, 40);
-            this.BtnAbsence.TabIndex = 3;
+            this.BtnAbsence.TabIndex = 5;
             this.BtnAbsence.Text = "Absences";
-            this.BtnAbsence.UseVisualStyleBackColor = true;
             this.BtnAbsence.Click += new System.EventHandler(this.BtnAbsence_Click);
             // 
             // groupBox3
@@ -229,17 +236,6 @@
             this.groupBox3.TabIndex = 20;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Ajout de personnels";
-            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
-            // 
-            // btnAjouterPersonnel
-            // 
-            this.btnAjouterPersonnel.Location = new System.Drawing.Point(667, 17);
-            this.btnAjouterPersonnel.Name = "btnAjouterPersonnel";
-            this.btnAjouterPersonnel.Size = new System.Drawing.Size(120, 40);
-            this.btnAjouterPersonnel.TabIndex = 4;
-            this.btnAjouterPersonnel.Text = "Ajouter";
-            this.btnAjouterPersonnel.UseVisualStyleBackColor = true;
-            this.btnAjouterPersonnel.Click += new System.EventHandler(this.button1_Click);
             // 
             // PersonnelsForm
             // 
@@ -250,7 +246,6 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "PersonnelsForm";
             this.Text = "Gestionnaire";
-            this.Load += new System.EventHandler(this.PersonnelsForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();

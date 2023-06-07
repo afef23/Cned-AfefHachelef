@@ -110,59 +110,58 @@
     <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="atelierDataSet.Designer.cs">
+    <Compile Include="Modèle\atelierDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>atelierDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="atelierDataSet1.Designer.cs">
+    <Compile Include="Modèle\atelierDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>atelierDataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="BddManager.cs" />
-    <Compile Include="AuthentificatonForm.cs">
+    <Compile Include="Vue\AuthentificatonForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AuthentificatonForm.Designer.cs">
+    <Compile Include="Vue\AuthentificatonForm.Designer.cs">
       <DependentUpon>AuthentificatonForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonnelsForm.cs">
+    <Compile Include="Vue\PersonnelsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PersonnelsForm.Designer.cs">
+    <Compile Include="Vue\PersonnelsForm.Designer.cs">
       <DependentUpon>PersonnelsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConfirmationForm.cs">
+    <Compile Include="Vue\ConfirmationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfirmationForm.Designer.cs">
+    <Compile Include="Vue\ConfirmationForm.Designer.cs">
       <DependentUpon>ConfirmationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbsencesForm.cs">
+    <Compile Include="Vue\AbsencesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbsencesForm.Designer.cs">
+    <Compile Include="Vue\AbsencesForm.Designer.cs">
       <DependentUpon>AbsencesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Contrôleur\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControl1.cs">
+    <Compile Include="Modèle\UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl1.Designer.cs">
+    <Compile Include="Modèle\UserControl1.Designer.cs">
       <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AuthentificatonForm.resx">
+    <EmbeddedResource Include="Vue\AuthentificatonForm.resx">
       <DependentUpon>AuthentificatonForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonnelsForm.resx">
+    <EmbeddedResource Include="Vue\PersonnelsForm.resx">
       <DependentUpon>PersonnelsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConfirmationForm.resx">
+    <EmbeddedResource Include="Vue\ConfirmationForm.resx">
       <DependentUpon>ConfirmationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbsencesForm.resx">
+    <EmbeddedResource Include="Vue\AbsencesForm.resx">
       <DependentUpon>AbsencesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -174,26 +173,26 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="atelierDataSet.xsc">
+    <None Include="Modèle\atelierDataSet.xsc">
       <DependentUpon>atelierDataSet.xsd</DependentUpon>
     </None>
-    <None Include="atelierDataSet.xsd">
+    <None Include="Modèle\atelierDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>atelierDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="atelierDataSet.xss">
+    <None Include="Modèle\atelierDataSet.xss">
       <DependentUpon>atelierDataSet.xsd</DependentUpon>
     </None>
-    <None Include="atelierDataSet1.xsc">
+    <None Include="Modèle\atelierDataSet1.xsc">
       <DependentUpon>atelierDataSet1.xsd</DependentUpon>
     </None>
-    <None Include="atelierDataSet1.xsd">
+    <None Include="Modèle\atelierDataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>atelierDataSet1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="atelierDataSet1.xss">
+    <None Include="Modèle\atelierDataSet1.xss">
       <DependentUpon>atelierDataSet1.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -225,10 +224,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contrôleur\" />
-    <Folder Include="Modèle\" />
-    <Folder Include="Vue\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

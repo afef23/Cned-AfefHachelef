@@ -89,7 +89,6 @@
             this.Controls.Add(this.textBoxLogin);
             this.Name = "AuthenficationForm";
             this.Text = "Authentification";
-            this.Load += new System.EventHandler(this.AuthenficationForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

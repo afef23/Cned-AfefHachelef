@@ -25,8 +25,9 @@ namespace Projet_portfolio
             InitializeComponent();
             InitConnection();
             idPersonnels = personnelId;
-            RecupAbscences();
+            RecupAbsences();
             RemplirComboBoxMotif();
+
         }
         private void InitConnection()
         {
@@ -45,7 +46,8 @@ namespace Projet_portfolio
 
         }
 
-        private void RecupAbscences()
+        //Module qui récupère les absences de la base de donnée et qui les affiche dans la listBox
+        private void RecupAbsences()
         {
             ListBoxAbsence.Visible = true;
             string query = "SELECT A.datedebut, A.datefin, M.libelle " +
@@ -63,8 +65,7 @@ namespace Projet_portfolio
                 string datefin = reader.GetString(1);
                 string motif = reader.GetString(2);
 
-
-                string listItem = datedebut + "/" + datefin + "/" + motif;
+                string listItem = datedebut + "|" + datefin + "|" + motif;
                 ListBoxAbsence.Items.Add(listItem);
             }
 
@@ -73,7 +74,7 @@ namespace Projet_portfolio
 
         }
 
-
+        //remplir la comboBoxMotif avec les motifs disponible dans la base de données
         private void RemplirComboBoxMotif()
         {
             string query = "SELECT libelle FROM motif";
@@ -83,24 +84,22 @@ namespace Projet_portfolio
             {
                 string nomMotif = reader.GetString(0);
                 comboBoxMotif.Items.Add(nomMotif);
-
-
             }
             reader.Close();
         }
 
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
+   
 
-        }
-
+        //Ajouter une absence
         private void BtnAjouterAbsence_Click(object sender, EventArgs e)
         {
-            DateTime dateDebut = TimePickerDebut.Value;
-            DateTime dateFin = TimePickerFin.Value;
+            DateTime datedebut = TimePickerDebut.Value;
+            string fNvxdatedebut = datedebut.ToString("yyyy-MM-dd");
+            DateTime datefin = TimePickerFin.Value;
+            string fNvxdatefin = datefin.ToString("yyyy-MM-dd");
 
-            // Vérifier que la date de début est inférieure à la date de fin
-            if (dateDebut <= dateFin)
+            // Vérifier que la date de début est inférieure ou égal à la date de fin
+            if (datedebut <= datefin)
             {
                 if (comboBoxMotif.SelectedItem != null)
                 {
@@ -111,8 +110,8 @@ namespace Projet_portfolio
                     string query = "INSERT INTO absence (idpersonnel, datedebut, datefin, idmotif) VALUES (@idpersonnel, @datedebut, @datefin, (SELECT idmotif FROM motif WHERE libelle = @motif))";
                     command = new MySqlCommand(query, connection);
                     command.Parameters.AddWithValue("@idpersonnel", idPersonnels);
-                    command.Parameters.AddWithValue("@datedebut", dateDebut);
-                    command.Parameters.AddWithValue("@datefin", dateFin);
+                    command.Parameters.AddWithValue("@datedebut", fNvxdatedebut);
+                    command.Parameters.AddWithValue("@datefin", fNvxdatefin);
                     command.Parameters.AddWithValue("@motif", motif);
 
                     int rowsAffected = command.ExecuteNonQuery();
@@ -120,7 +119,8 @@ namespace Projet_portfolio
                     {
                         MessageBox.Show("L'absence a été ajoutée.");
                         ListBoxAbsence.Items.Clear();
-                        RecupAbscences();
+                        RecupAbsences();
+                        BtnAnnulerAbsence_Click(null, null);
                     }
                 }
             }
@@ -129,17 +129,9 @@ namespace Projet_portfolio
                 MessageBox.Show("La date de début doit être inférieur à la date de fin.");
             }
         }
+     
 
-        private void comboBoxMotif_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //Annuler la saisie
         private void BtnAnnulerAbsence_Click(object sender, EventArgs e)
         {
             TimePickerDebut.Value = DateTime.Now;
@@ -147,25 +139,81 @@ namespace Projet_portfolio
             comboBoxMotif.SelectedIndex = -1;
         }
 
+        //Modifier une absence
         private void BtnModifierAbsence_Click(object sender, EventArgs e)
         {
             if (ListBoxAbsence.SelectedIndex != -1)
             {
+                try
+                {
+                    if (comboBoxMotif.SelectedItem != null)
+                    {
+                        //récupérer le contenue de la ListBoxAbsence 
+                        string ligne = ListBoxAbsence.SelectedItem.ToString();
+                        List<string> liste = ligne.Split('|').ToList();
+                        string datedebut = liste[0];
+                        string datefin = liste[1];
+                        string motif = liste[2];
+                        DateTime nvxdatedebut = TimePickerDebut.Value;
+                        string fNvxdatedebut = nvxdatedebut.ToString("yyyy-MM-dd");
+                        DateTime nvxdatefin = TimePickerFin.Value;
+                        string fNvxdatefin = nvxdatefin.ToString("yyyy-MM-dd");
+                        string nvxmotif = comboBoxMotif.SelectedItem.ToString();
+                        if (nvxdatedebut <= nvxdatefin)
+                        {
+                           //Mettre à jour les données dans la base
+                            string query = "UPDATE absence SET datedebut = @nouvelleDateDebut, datefin = @nouvelleDateFin, idmotif = (SELECT idmotif FROM motif WHERE libelle = @nouveauMotif) WHERE datedebut = @datedebut AND datefin = @datefin AND idpersonnel = @idperso";
+                            command = new MySqlCommand(query, connection);
+                            command.Parameters.AddWithValue("@nouvelleDateDebut", fNvxdatedebut);
+                            command.Parameters.AddWithValue("@nouvelleDateFin", fNvxdatefin);
+                            command.Parameters.AddWithValue("@nouveauMotif", nvxmotif);
+                            command.Parameters.AddWithValue("@datedebut", datedebut);
+                            command.Parameters.AddWithValue("@datefin", datefin);
+                            command.Parameters.AddWithValue("@idperso", idPersonnels);
+                            int rowsAffected = command.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                // Mettre à jour l'affichage dans la ListBox
+                                ListBoxAbsence.Items.Clear();
+                                RecupAbsences();
+
+                                MessageBox.Show("L'Absence a bien était modifiée.");
+                                BtnAnnulerAbsence_Click(null, null);
+
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("La date de début doit être inférieure à la date de fin.");
+                        }
+                    }
+                    else { MessageBox.Show("Veuillez sélectionner un Motif !"); }
+                }
+                catch { }
+                }
+        }
+        //Supprimer une absence
+        private void BtnSupprimerAbsence_Click(object sender, EventArgs e)
+        {
+            if (ListBoxAbsence.SelectedIndex != -1)
+            {
+                //Récupérer le contenue sélectionné et le metrre dans des variables 
                 string ligne = ListBoxAbsence.SelectedItem.ToString();
-                List<string> liste = ligne.Split('/').ToList();
+                List<string> liste = ligne.Split('|').ToList();
                 string datedebut = liste[0];
                 string datefin = liste[1];
                 string motif = liste[2];
-                DateTime nvxdatedebut = TimePickerDebut.Value;
-                DateTime nvxdatefin = TimePickerFin.Value;
-                string nvxmotif = comboBoxMotif.SelectedItem.ToString();
-                if (nvxdatedebut <= nvxdatefin)
+
+                //Demander une confirmation
+                ConfirmationForm confirmationForm = new ConfirmationForm();
+                confirmationForm.ShowDialog();
+                if (confirmationForm.confirmation)
                 {
-                    string query = "UPDATE absence SET datedebut = @nouvelleDateDebut, datefin = @nouvelleDateFin, idmotif = (SELECT idmotif FROM motif WHERE libelle = @nouveauMotif) WHERE datedebut = @datedebut AND datefin = @datefin AND idpersonnel = @idperso";
+                    //Mettre à jour les données dans la base
+                    string query = "DELETE FROM absence WHERE datedebut = @datedebut AND datefin = @datefin AND idpersonnel = @idperso";
                     command = new MySqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@nouvelleDateDebut", nvxdatedebut);
-                    command.Parameters.AddWithValue("@nouvelleDateFin", nvxdatefin);
-                    command.Parameters.AddWithValue("@nouveauMotif", nvxmotif);
                     command.Parameters.AddWithValue("@datedebut", datedebut);
                     command.Parameters.AddWithValue("@datefin", datefin);
                     command.Parameters.AddWithValue("@idperso", idPersonnels);
@@ -173,30 +221,13 @@ namespace Projet_portfolio
 
                     if (rowsAffected > 0)
                     {
-                        // Mettre à jour l'affichage dans la ListBox
                         ListBoxAbsence.Items.Clear();
-                        RecupAbscences();
-
-                        MessageBox.Show("Absence modifiée avec succès.");
+                        RecupAbsences();
+                        MessageBox.Show("L'Absence a bien était supprimée.");
                     }
-                    else
-                    {
-                        MessageBox.Show("La modification de l'absence a échoué.");
-                    }
-
-
-
-
-
-                }
-                else
-                {
-                    MessageBox.Show("La date de debut doit être inferieur à la date de fin.");
-
 
                 }
             }
-
         }
     } }
 

@@ -56,12 +56,11 @@
             // LblConfirmation
             // 
             this.LblConfirmation.AutoSize = true;
-            this.LblConfirmation.Location = new System.Drawing.Point(48, 26);
+            this.LblConfirmation.Location = new System.Drawing.Point(92, 20);
             this.LblConfirmation.Name = "LblConfirmation";
-            this.LblConfirmation.Size = new System.Drawing.Size(246, 20);
+            this.LblConfirmation.Size = new System.Drawing.Size(211, 20);
             this.LblConfirmation.TabIndex = 2;
-            this.LblConfirmation.Text = "Êtes-vous sûr de vouloir faire ça ?";
-            this.LblConfirmation.Click += new System.EventHandler(this.LblConfirmation_Click);
+            this.LblConfirmation.Text = "Êtes-vous sûr de continuer ?";
             // 
             // ConfirmationForm
             // 
@@ -73,7 +72,6 @@
             this.Controls.Add(this.BtnConfirmer);
             this.Name = "ConfirmationForm";
             this.Text = "Confirmation";
-            this.Load += new System.EventHandler(this.ConfirmationForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
